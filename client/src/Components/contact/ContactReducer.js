@@ -33,10 +33,23 @@ export default (state, action) => {
         ...state,
         current: action.payload,
       };
-    case UPDATE_CONTACT:
+    case CLEAR_CURRRENT:
       return {
         ...state,
         current: null,
+      };
+    case FILTER_CONTACTS:
+      return {
+        ...state,
+        filtered: state.contacts.filter((contact) => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return contact.name.match(regex) || contact.email.match(regex);
+        }),
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null,
       };
 
     default:

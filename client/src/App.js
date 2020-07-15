@@ -9,9 +9,12 @@ import register from './Components/AuthForm/Register';
 import login from './Components/AuthForm/Login';
 import AlertState from './Components/context/alert/AlertState';
 import Alert from './Components/layout/Alerts';
+import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
-
+if(localStorage.token){
+  setAuthToken(localStorage.token);
+}
 const App = () => {
   return (
     <AuthState>

@@ -3,16 +3,18 @@ import ContactContext from '../contact/ContactContext';
 
 const ContactForm = () => {
   const contactContext = useContext(ContactContext);
-  const { addContact, current, clearCurrent, updateContact } = contactContext;
+
+  const { addContact, updateContact, clearCurrent, current } = contactContext;
+
   useEffect(() => {
-    if (current != null) {
+    if (current !== null) {
       setContact(current);
     } else {
       setContact({
         name: '',
         email: '',
         phone: '',
-        type: 'personal',
+        type: 'personal'
       });
     }
   }, [contactContext, current]);
@@ -21,38 +23,36 @@ const ContactForm = () => {
     name: '',
     email: '',
     phone: '',
-    type: 'personal',
+    type: 'personal'
   });
+
   const { name, email, phone, type } = contact;
-  const onChange = (e) =>
+
+  const onChange = e =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
-  const onsubmit = (e) => { 
+  const onSubmit = e => {
     e.preventDefault();
     if (current === null) {
       addContact(contact);
     } else {
       updateContact(contact);
     }
-    // setContact({
-    //   name: '',
-    //   email: '',
-    //   phone: '',
-    //   type: 'personal',
-    // });
+    clearAll();
   };
+
   const clearAll = () => {
     clearCurrent();
   };
 
   return (
-    <form onSubmit={onsubmit}>
+    <form onSubmit={onSubmit}>
       <h2 className='text-primary'>
-        {current ? 'Edit Contact' : 'add contact'}
+        {current ? 'Edit Contact' : 'Add Contact'}
       </h2>
       <input
         type='text'
-        placeholder='name'
+        placeholder='Name'
         name='name'
         value={name}
         onChange={onChange}
@@ -71,35 +71,34 @@ const ContactForm = () => {
         value={phone}
         onChange={onChange}
       />
-      <h5>Contact type</h5>
+      <h5>Contact Type</h5>
       <input
         type='radio'
         name='type'
         value='personal'
         checked={type === 'personal'}
         onChange={onChange}
-      />
-      Personal{''}
+      />{' '}
+      Personal{' '}
       <input
         type='radio'
         name='type'
         value='professional'
         checked={type === 'professional'}
         onChange={onChange}
-      />
-      professional
+      />{' '}
+      Professional
       <div>
         <input
           type='submit'
-          value={current ? 'update Contact' : 'add contact'}
+          value={current ? 'Update Contact' : 'Add Contact'}
           className='btn btn-primary btn-block'
         />
       </div>
       {current && (
         <div>
           <button className='btn btn-light btn-block' onClick={clearAll}>
-            {' '}
-            clear
+            Clear
           </button>
         </div>
       )}

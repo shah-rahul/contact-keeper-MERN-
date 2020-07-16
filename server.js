@@ -6,12 +6,11 @@ const app = express();
 connectDB();
 // init middle ware
 app.use(express.json({ extended: false }));
-app.get('/', (req, res) => res.send('hello world'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contacts', require('./routes/contacts'));
 
-// serve static assets in production
+// serve static a ssets in production
 
 if (process.env.NODE_ENV === 'production') {
   //   set static folder

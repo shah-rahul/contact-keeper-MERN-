@@ -13,7 +13,7 @@ const Contact = () => {
 
   // eslint-disable-next-line
   if (contacts !== null && contacts.length === 0 && !loading) {
-    return <h4> add contacts madharchod</h4>;
+    return <h4> Please add contacts</h4>;
   }
 
   return (
